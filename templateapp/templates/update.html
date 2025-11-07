@@ -1,0 +1,18 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+  <form method="POST" action="{% url 'update' data.id %}">
+        {% csrf_token%}
+   
+    <label>title </label>
+    <input type="text" name="title" value="{{data.title}}"/>
+     <label>status </label>
+    <input type="text" name="status" value="{{data.status}}"/>
+    <button>Submit </button>
+  <form/>
+</body>
+</html>  
