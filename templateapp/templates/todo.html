@@ -1,20 +1,134 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Review List</title>
+
+    <style>
+        /* Basic reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: "Poppins", sans-serif;
+            background: linear-gradient(135deg, #74ebd5, #ACB6E5);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            padding-top: 60px;
+        }
+
+        /* Container for the list */
+        ul {
+            list-style-type: none;
+            background-color: white;
+            padding: 25px 30px;
+            border-radius: 12px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+            width: 500px;
+        }
+
+        h2 {
+            text-align: center;
+            color: #4a4a4a;
+            margin-bottom: 20px;
+        }
+
+        li {
+            background: #f9f9f9;
+            margin-bottom: 15px;
+            padding: 15px 20px;
+            border-radius: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        li:hover {
+            transform: scale(1.02);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+        }
+
+        /* Text inside list */
+        .review-text {
+            font-size: 16px;
+            font-weight: 500;
+            color: #333;
+        }
+
+        /* Button styles */
+        button {
+            background-color: #2575fc;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            padding: 8px 14px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #1a5ad9;
+        }
+
+        /* Different color for delete button */
+        .delete-btn {
+            background-color: #e74c3c;
+        }
+
+        .delete-btn:hover {
+            background-color: #c0392b;
+        }
+
+        /* Layout of action buttons */
+        .actions {
+            display: flex;
+            gap: 10px;
+        }
+
+        /* Empty list message */
+        .empty {
+            text-align: center;
+            color: #666;
+            font-style: italic;
+            margin-top: 20px;
+        }
+    </style>
 </head>
+
 <body>
     <ul>
-   {% for review in data%}
-   <li>
-    {{review.title}} {{review.status}}
-    <a href="{%  url 'update' review.id %}"><button>Update</button></a>
-    <a href="{% url 'delete' review.id %}"><button>Delete</button></a>
-  
-    </li>
-    {% endfor %}
-</ul>
+        <h2>📝 Review List</h2>
+
+        {% if data %}
+            {% for review in data %}
+            <li>
+                <div class="review-text">
+                    {{ review.title }} — <strong>{{ review.status }}</strong>
+                </div>
+
+                <div class="actions">
+                    <a href="{% url 'update' review.id %}">
+                        <button>Update</button>
+                    </a>
+                    <a href="{% url 'delete' review.id %}">
+                        <button class="delete-btn">Delete</button>
+                    </a>
+                </div>
+            </li>
+            {% endfor %}
+        {% else %}
+            <p class="empty">No reviews found.</p>
+        {% endif %}
+    </ul>
 </body>
 </html>

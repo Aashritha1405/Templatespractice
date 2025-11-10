@@ -16,6 +16,7 @@ def signup(request):
 def login_view(request):
     if request.method == "POST":
         user=authenticate(request,username=request.POST.get('username'),password=request.POST.get('password'))
+        print(user)
         if user is None:
             return HttpResponse("user mot found")
         login(request, user)
@@ -28,7 +29,7 @@ def login_view(request):
 def get_user(request):
     return HttpResponse({"data":"data"})
 
-def logout(request):
+def logoutF(request):
     logout(request)
     return redirect('login')
     
@@ -44,7 +45,7 @@ def create(request):
 
 def todo(request):
     todos=TODO.objects.all()
-    print(TODO.objects.values())
+    # print(TODO.objects.values())
     context={"data":todos}
     return render(request,"todo.html",context)
 

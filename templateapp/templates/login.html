@@ -1,22 +1,111 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Login</title>
+
+    <!-- CSS styling inside style tag -->
+    <style>
+        /* Reset & Base Styling */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: "Poppins", sans-serif;
+            background: linear-gradient(135deg, #6a11cb, #2575fc);
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* Form container */
+        form {
+            background-color: white;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+            width: 320px;
+            text-align: center;
+        }
+
+        /* Heading */
+        h2 {
+            color: #2575fc;
+            margin-bottom: 25px;
+        }
+
+        /* Input container */
+        div {
+            margin-bottom: 20px;
+            text-align: left;
+        }
+
+        label {
+            display: block;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 5px;
+        }
+
+        /* Input fields */
+        input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            font-size: 14px;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        input:focus {
+            border-color: #2575fc;
+            outline: none;
+            box-shadow: 0 0 6px rgba(37, 117, 252, 0.4);
+        }
+
+        /* Login button */
+        button {
+            width: 100%;
+            background-color: #2575fc;
+            color: white;
+            font-weight: bold;
+            border: none;
+            border-radius: 6px;
+            padding: 10px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #1a5ad9;
+        }
+    </style>
 </head>
+
 <body>
- <form method="POST" action="{% url 'login' %}" >
-    {%csrf_token%}
-    <div>
-    <label for="username">Username:</label>
-    <input type="text" name="username"/>
-    </div>
-    <div>
-    <label for="password">Password</label>
-    <input type="text" name="password"/>
-    </div>
-    <button>login<button/>
-    <form/>
+    <form method="POST" action="{% url 'login' %}">
+        {% csrf_token %}
+
+        <h2>Login</h2>
+
+        <div>
+            <label for="username">Username:</label>
+            <input type="text" name="username" id="username" placeholder="Enter your username" required>
+        </div>
+
+        <div>
+            <label for="password">Password:</label>
+            <input type="password" name="password" id="password" placeholder="Enter your password" required>
+        </div>
+
+        <button type="submit">Login</button>
+    </form>
 </body>
-</html>  
+</html>
